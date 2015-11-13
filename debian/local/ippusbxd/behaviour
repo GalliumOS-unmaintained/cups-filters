@@ -1,0 +1,2 @@
+- Must use CRLF for transfer: chunked messages
+- Rotates USB interfaces between TCP connections

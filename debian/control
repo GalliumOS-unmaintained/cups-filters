@@ -1,0 +1,198 @@
+Source: cups-filters
+Standards-Version: 3.9.5
+Priority: optional
+Section: net
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+XSBC-Original-Maintainer: Debian Printing Team <debian-printing@lists.debian.org>
+Uploaders: 
+ Till Kamppeter <till.kamppeter@gmail.com>,
+ Martin Pitt <mpitt@debian.org>,
+ Didier Raboud <odyx@debian.org>
+Build-Depends: 
+ autoconf,
+ autotools-dev,
+ debhelper (>= 9~),
+ dh-autoreconf,
+ dh-systemd,
+ dpkg-dev (>= 1.16.1~),
+ dh-apparmor,
+ pkg-config,
+ sharutils,
+ ghostscript (>= 9.02~),
+ poppler-utils,
+ libglib2.0-dev,
+ liblcms2-dev,
+ libpoppler-private-dev (>= 0.16.0),
+ libpoppler-cpp-dev,
+ libqpdf-dev (>= 4.0.1),
+ libjpeg-dev,
+ libpng-dev | libpng12-dev,
+ libtiff-dev,
+ libcups2-dev,
+ libcupsimage2-dev (>= 1.5.2-6~),
+ libijs-dev,
+ zlib1g-dev,
+ libfontconfig1-dev,
+ libdbus-1-dev,
+ libavahi-common-dev,
+ libavahi-client-dev,
+ libavahi-glib-dev,
+ librsvg2-bin,
+# Needed for tests
+ fonts-dejavu-core,
+# Needed for ippusbxd
+ libudev-dev,
+ libusb-1.0-0-dev
+Homepage: http://www.openprinting.org/
+Vcs-Git: https://alioth.debian.org/anonscm/git/printing/cups-filters.git
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=printing/cups-filters.git
+
+Package: libcupsfilters1
+Section: libs
+Architecture: any
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${shlibs:Depends}, 
+ ${misc:Depends}
+Multi-Arch: same
+Description: OpenPrinting CUPS Filters - Shared library
+ This library contains functions commonly used by the CUPS filters
+ in the OpenPrinting CUPS filters package, currently functions to read
+ several different image formats and to convert bitmaps between different
+ color spaces.
+
+Package: libfontembed1
+Section: libs
+Architecture: any
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${shlibs:Depends}, 
+ ${misc:Depends}
+Multi-Arch: same
+Description: OpenPrinting CUPS Filters - Font Embed Shared library
+ This library contains functions for font embedding in PDF files, commonly
+ used by CUPS filters.
+
+Package: cups-filters
+Architecture: any
+Depends: ${shlibs:Depends}, 
+ ${misc:Depends},
+ cups-filters-core-drivers (>= ${binary:Version}),
+ bc,
+ ghostscript (>= 9.02~),
+Recommends: colord
+Suggests: foomatic-db-compressed-ppds | foomatic-db
+Conflicts: ghostscript-cups,
+ foomatic-filters
+Replaces: cups (<< 1.5.0-16), 
+ cups-common (<< 1.5.0-16),
+ ghostscript-cups,
+ foomatic-filters,
+ cups-ppdc (<< 1.6)
+Breaks: cups (<< 1.5.0-16), 
+ cups-common (<< 1.5.0-16),
+ cups-ppdc (<< 1.6)
+Provides: ghostscript-cups,
+ foomatic-filters
+Description: OpenPrinting CUPS Filters - Main Package
+ This package provides additional CUPS filters which are not provided
+ by the CUPS project itself. This includes filters for a PDF based
+ printing workflow.
+ .
+ This package contains the filters for printing with drivers/PPDs and
+ for converting non-PDF input files to PDF.
+
+Package: cups-filters-core-drivers
+Architecture: any
+Depends: ${shlibs:Depends}, 
+ ${misc:Depends},
+ bc,
+ poppler-utils
+Replaces: cups (<< 1.5.0-16),
+ cups-filters (<< 1.0.44-1~)
+Breaks: cups (<< 1.5.0-16),
+ cups-filters (<< 1.0.44-1~)
+Description: OpenPrinting CUPS Filters - PPD-less printing
+ This package provides additional CUPS filters which are not provided
+ by the CUPS project itself. This includes filters for a PDF based
+ printing workflow.
+ .
+ This package contains only the filters needed for PPD-less printing of
+ PDF input files on IPP printers with known, common languages (PDF,
+ PostScript, PWG Raster, PCL).
+
+Package: libcupsfilters-dev
+Section: libdevel
+Architecture: any
+Depends: ${shlibs:Depends},
+ ${misc:Depends},
+ libcupsfilters1 (= ${binary:Version})
+Description: OpenPrinting CUPS Filters - Development files for the library
+ This library contains functions commonly used by the CUPS filters
+ in the OpenPrinting CUPS filters package, currently functions to read
+ several different image formats and to convert bitmaps between different
+ color spaces.
+ .
+ This package contains the header files to develop applications (CUPS
+ filters, printer drivers) using libcupsfilters.
+
+Package: libfontembed-dev
+Section: libdevel
+Architecture: any
+Depends: ${shlibs:Depends},
+ ${misc:Depends},
+ libfontembed1 (= ${binary:Version})
+Description: OpenPrinting CUPS Filters - Development files for font embed library
+ This library contains functions for font embedding in PDF files, commonly
+ used by CUPS filters.
+ .
+ This package contains the header files to develop applications using
+ libfontembed.
+
+Package: cups-browsed
+Architecture: any
+Depends: ${shlibs:Depends}, 
+ ${misc:Depends}
+Recommends: avahi-daemon (>= 0.6.31-3~)
+Breaks: cups-daemon (<< 1.6.4)
+Enhances: cups
+Description: OpenPrinting CUPS Filters - cups-browsed
+ This package provides cups-browsed, a daemon which browses the Bonjour
+ broadcasts of shared remote CUPS printers and makes the printers
+ available locally, replacing the CUPS broadcasting/browsing which was
+ dropped in CUPS 1.6.x. This way the old behavior of having the remote
+ printers available automatically is now re-implemented with Bonjour.
+ .
+ cups-browsed is also useful with a CUPS >= 1.6 client to allow the
+ latter to browse the printer list of CUPS < 1.6 servers (by using the
+ old 'cups' protocol in BrowseRemoteProtocols).
+ .
+ cups-browsed is also useful with a CUPS >= 1.6 server to allow CUPS <
+ 1.6 clients to browse its printer list (by using the old 'cups'
+ protocol in BrowseLocalProtocols).
+
+#Package: cups-filters-dbg
+#Priority: extra
+#Section: debug
+#Architecture: any
+#Depends: ${shlibs:Depends},
+#  ${misc:Depends},
+#  cups-filters (= ${binary:Version}) | libcupsfilters1 (= ${binary:Version})
+#Description: OpenPrinting CUPS Filters - Debugging symbols
+# This package provides the debugging symbols for OpenPrinting
+# CUPS Filters.
+
+Package: cups-filters-ippusbxd
+Architecture: any
+Depends: ${shlibs:Depends}, 
+ ${misc:Depends}
+Recommends: system-config-printer-udev
+Enhances: cups
+Description: ippusbxd - Daemon for IPP-over-USB printer support
+ This package provides ippusbxd, a daemon which lets IPP-over-USB
+ printers appear as regular network IPP printers and so one can prints
+ on them with CUPS ("ipp" backend) and access the configuration web
+ interface with any browser.
+ .
+ We have added ippusbxd as a binary package to cups-filters only
+ temporarily to get ippusbxd into Utopic before Feature Freeze. Later
+ on, an own source package for ippusbxd will get introduced in Debian
+ and synced to Ubuntu, its binary package replacing this package.
