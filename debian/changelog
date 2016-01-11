@@ -1,3 +1,9 @@
+cups-filters (1.0.67-0ubuntu2.4-galliumos1) vivid-security; urgency=medium
+
+  * Set package version to match provenance
+
+ -- reynhout <reynhout@galliumos.org>  Sun, 10 Jan 2016 21:05:33 +0000
+
 cups-filters (1.0.67-0ubuntu2.5) vivid-security; urgency=medium
 
   * Commented out modules in /etc/modules-load.d/cups-filters.conf
