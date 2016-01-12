@@ -1,3 +1,11 @@
+cups-filters (1.0.67-0ubuntu2.6-galliumos1) vivid-security; urgency=medium
+
+  * Reapply prior GalliumOS changes:
+    - disable parallel printer modules
+    - set DEB_HOST_MULTIARCH in debian/rules
+
+ -- reynhout <reynhout@galliumos.org>  Tue, 12 Jan 2016 17:28:18 +0000
+
 cups-filters (1.0.67-0ubuntu2.6) vivid-security; urgency=medium
 
   * SECURITY UPDATE: code execution via improper escaping in foomatic-rip
