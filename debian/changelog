@@ -1,3 +1,21 @@
+cups-filters (1.0.67-0ubuntu2.6) vivid-security; urgency=medium
+
+  * SECURITY UPDATE: code execution via improper escaping in foomatic-rip
+    - debian/patches/CVE-2015-8560.patch: add semicolon to list of shell
+      escape characters in filter/foomatic-rip/util.c.
+    - CVE-2015-8560
+
+ -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Wed, 16 Dec 2015 08:11:52 -0500
+
+cups-filters (1.0.67-0ubuntu2.5) vivid-security; urgency=medium
+
+  * SECURITY UPDATE: code execution via improper escaping in foomatic-rip
+    - debian/patches/CVE-2015-8327.patch: add backtick to list of shell
+      escape characters in filter/foomatic-rip/util.c.
+    - CVE-2015-8327
+
+ -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Thu, 03 Dec 2015 09:02:40 -0500
+
 cups-filters (1.0.67-0ubuntu2.4-galliumos1) vivid-security; urgency=medium
 
   * Set package version to match provenance

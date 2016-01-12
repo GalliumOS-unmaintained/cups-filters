@@ -3,7 +3,7 @@
 derives_from_ubuntu := $(shell (dpkg-vendor --derives-from Ubuntu && echo "yes") || echo "no")
 
 export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
-export DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+
 %:
 	dh $@ --parallel --with autoreconf,systemd
 

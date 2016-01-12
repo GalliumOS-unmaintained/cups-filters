@@ -1,2 +1,4 @@
 cups-browsed-fix-numeric-ids-of-gsources.patch
 CVE-2015-3258-3279.patch
+CVE-2015-8327.patch
+CVE-2015-8560.patch
